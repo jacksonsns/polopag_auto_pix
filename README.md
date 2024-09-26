@@ -1,6 +1,8 @@
 # canary_auto_pix
 ```markdown
 
+# Works with PIX from: https://polopag.com
+
 # Update package lists for upgrades and new package installations
 sudo apt update
 
@@ -33,3 +35,6 @@ CREATE TABLE `polopag_transacoes` (
   `expires_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)  -- Chave primária apenas
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+# Edit the file pix_class.lua with your preferences and api_key.
+# data/libs/polopag/pix_class.lua
