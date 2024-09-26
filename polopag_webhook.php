@@ -7,7 +7,7 @@ ini_set('display_errors', 0);
 $config_path = '/caminho/seguro/config.lua';
 
 // Coluna dos coins
-$coins_column = "shopcoins";
+$coins_column = "coins_transferable";
 
 function read_config($config_path)
 {
