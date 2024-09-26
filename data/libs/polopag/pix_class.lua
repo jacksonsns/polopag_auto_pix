@@ -408,7 +408,7 @@ end
 
 function PixGenerator:getImage()
 	local informationPriceValue = stringFormat("Valor: R$%s,00", self:getPrice())
-	local informationPointsValue = stringFormat("Pontos a receber: %s Coins", self:getPoints())
+	local informationPointsValue = stringFormat("Coins: %s", self:getPoints())
 
 	local qrCode = self:getQRCodeURL()
 
