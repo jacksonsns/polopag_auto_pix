@@ -1,18 +1,16 @@
 # canary_auto_pix
 ```markdown
+
+# Update package lists for upgrades and new package installations
+sudo apt update
+
 # Install Python 3.7
 sudo apt install python3.7
 
 # Verify Python 3.7 installation
 python3.7 -V
 
-# Verify pip for Python 3.7 installation
-pip3.7 -V
-
-# Update package lists for upgrades and new package installations
-sudo apt update
-
-# Verify pip for Python 3.7 installation again
+# Verify pip for Python 3.7 installation (Install pip for python 3.7 if not exists)
 pip3.7 -V
 
 # Install MySQL connector for Python
