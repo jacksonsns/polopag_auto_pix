@@ -3,9 +3,20 @@
 # Works with PIX from: https://polopag.com
 
 ## Instructions for Linux Machines
-
-### For Older Linux Machines
 ```
+### For Newer Linux Machines
+
+1. **Update package lists for upgrades and new package installations:**
+  ```sh
+  sudo apt update
+  ```
+
+2. **Install MySQL connector for Python:**
+  ```sh
+  python3 -m pip install mysql-connector-python
+  ```
+  
+### For Older Linux Machines
 1. **Update package lists for upgrades and new package installations:**
   ```sh
   sudo apt update
@@ -24,26 +35,15 @@
 4. **Verify pip for Python 3.7 installation (Install pip for Python 3.7 if not already installed):**
   ```sh
   pip3.7 -V
+  python3.7 -m pip install --upgrade pip
   ```
 
-5. **Install MySQL connector for Python 3.7:**
+6. **Install MySQL connector for Python 3.7:**
   ```sh
   python3.7 -m pip install mysql-connector-python
   ```
 
-6. **Note:** If your machine is old, remember to change `python3` to `python3.7` in the `pix_class` script.
-
-### For Newer Linux Machines
-
-1. **Update package lists for upgrades and new package installations:**
-  ```sh
-  sudo apt update
-  ```
-
-2. **Install MySQL connector for Python:**
-  ```sh
-  python3 -m pip install mysql-connector-python
-  ```
+7. **Note:** If your machine is old, remember to change `python3` to `python3.7` in the `pix_class` script.
 
 ## SQL Statement to Create Table
 
