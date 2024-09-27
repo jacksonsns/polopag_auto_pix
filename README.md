@@ -5,7 +5,7 @@
 ## Instructions for Linux Machines
 
 ### For Older Linux Machines
-
+```
 1. **Update package lists for upgrades and new package installations:**
   ```sh
   sudo apt update
@@ -63,6 +63,8 @@ CREATE TABLE `polopag_transacoes` (
   `coins_table` varchar(255) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL,
+  `origin` enum('game', 'site') NOT NULL DEFAULT 'site',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
@@ -76,4 +78,3 @@ CREATE TABLE `polopag_transacoes` (
 3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`.
 
 4. **Configure `polopag_webhook.php`:** Open the file and set the path to `config.lua`.
-```
