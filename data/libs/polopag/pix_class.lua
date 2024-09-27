@@ -68,7 +68,7 @@ local MODAL_COPIA_COLA_BUTTON_NUMBER = 0
 
 local PIX_GENERATED_MODAL_TITLE = "Pix Gerado: "
 local PIX_GENERATED_MODAL_MESSAGE_TUTORIAL = "Escaneie o QRCode e efetue o pagamento."
-local PIX_GENERATED_MODAL_MESSAGE_WARNING = "Os seus pontos vao ser creditados automaticamente após o pagamento."
+local PIX_GENERATED_MODAL_MESSAGE_WARNING = "Os seus pontos vao ser creditados automaticamente ao finalizar o pagamento."
 local PIX_GENERATED_MODAL_BUTTON_COPIA_COLA_ = "Copia e Cola"
 local PIX_GENERATED_MODAL_BUTTON_VERIFY_PIX = "Verificar"
 
