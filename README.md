@@ -1,24 +1,54 @@
 # canary_auto_pix
 ```markdown
-
 # Works with PIX from: https://polopag.com
 
-# Update package lists for upgrades and new package installations
-sudo apt update
+## Instructions for Linux Machines
 
-# Install Python 3.7
-sudo apt install python3.7
+### For Older Linux Machines
 
-# Verify Python 3.7 installation
-python3.7 -V
+1. **Update package lists for upgrades and new package installations:**
+  ```sh
+  sudo apt update
+  ```
 
-# Verify pip for Python 3.7 installation (Install pip for python 3.7 if not exists)
-pip3.7 -V
+2. **Install Python 3.7:**
+  ```sh
+  sudo apt install python3.7
+  ```
 
-# Install MySQL connector for Python
-python3.7 -m pip install mysql-connector-python
+3. **Verify Python 3.7 installation:**
+  ```sh
+  python3.7 -V
+  ```
 
-# SQL statement to create.
+4. **Verify pip for Python 3.7 installation (Install pip for Python 3.7 if not already installed):**
+  ```sh
+  pip3.7 -V
+  ```
+
+5. **Install MySQL connector for Python 3.7:**
+  ```sh
+  python3.7 -m pip install mysql-connector-python
+  ```
+
+6. **Note:** If your machine is old, remember to change `python3` to `python3.7` in the `pix_class` script.
+
+### For Newer Linux Machines
+
+1. **Update package lists for upgrades and new package installations:**
+  ```sh
+  sudo apt update
+  ```
+
+2. **Install MySQL connector for Python:**
+  ```sh
+  python3 -m pip install mysql-connector-python
+  ```
+
+## SQL Statement to Create Table
+
+Use the following SQL statement to create the `polopag_transacoes` table:
+```sql
 CREATE TABLE `polopag_transacoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
@@ -35,11 +65,15 @@ CREATE TABLE `polopag_transacoes` (
   `expires_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 
-# Edit the file pix_class.lua with your preferences and api_key.
+## File Configuration
 
-# polopag.py has to be in the main directory alongside config.lua
+1. **Edit `pix_class.lua`:** Customize the file with your preferences and `api_key`.
 
-# polopag_webhook.php must be in the main directory of your site alongside index.php
+2. **Place `polopag.py`:** Ensure `polopag.py` is in the main directory alongside `config.lua`.
 
-# polopag_webhook.php requires configuration (Open the file and set the path to config.lua)
+3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`.
+
+4. **Configure `polopag_webhook.php`:** Open the file and set the path to `config.lua`.
+```

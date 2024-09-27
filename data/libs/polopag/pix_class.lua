@@ -368,7 +368,7 @@ function PixGenerator:generateQRCode()
     local solicitacaoPagador = configManager.getString(configKeys.SERVER_NAME):gsub("%s+", "")
     self:setReference(reference)
 
-    local command = string.format("python3.7 polopag.py %s %s %s %s %s %s %s %s > /dev/null 2>&1 &", self.apiKey,
+    local command = string.format("python3 polopag.py %s %s %s %s %s %s %s %s > /dev/null 2>&1 &", self.apiKey,
         formattedPrice, solicitacaoPagador, URL_YOUR_SERVER_WEBHOOK, self:getPoints(), reference, coinsTableInDatabase,
         self.accountId)
 
