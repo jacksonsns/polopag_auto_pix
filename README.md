@@ -33,8 +33,13 @@ CREATE TABLE `polopag_transacoes` (
   `coins_table` varchar(255) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)  -- Chave primária apenas
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # Edit the file pix_class.lua with your preferences and api_key.
-# data/libs/polopag/pix_class.lua
+
+# polopag.py has to be in the main directory alongside config.lua
+
+# polopag_webhook.php must be in the main directory of your site alongside index.php
+
+# polopag_webhook.php requires configuration (Open the file and set the path to config.lua)
