@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de PIX</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #pixModal img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h1>Gerar PIX</h1>
+        <form id="pixForm" class="d-flex flex-column align-items-center">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="account_name" name="account_name" value="godgod">
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <span>R$</span>
+                <input type="number" class="form-control mx-2" id="price" name="price" placeholder="Valor" required
+                    style="max-width: 70px;" min="0" step="1">
+                <span>.00</span>
+            </div>
+            <button type="submit" class="btn btn-success">Gerar PIX</button>
+        </form>
+    </div>
+
+    <!-- Modal de PIX (com Bootstrap) -->
+    <div class="modal fade" id="pixModal" tabindex="-1" aria-labelledby="pixModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pixModalLabel">Pague via PIX</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Referência: <span id="reference"></span></p>
+                    <p>Valor: R$ <span id="pixValue"></span></p>
+                    <p>Pontos: <span id="points"></span></p>
+                    <img id="qrCodeImage" src="" alt="QR Code PIX">
+                    <p>Escaneie o QR code para efetuar o pagamento.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function showPixModal(reference, price, points, qrCodeBase64) {
+            $('#reference').text(reference);
+            $('#pixValue').text(price.toFixed(2).replace('.', ','));
+            $('#points').text(points);
+            $('#qrCodeImage').attr('src', 'data:image/png;base64,' + qrCodeBase64);
+            $('#pixModal').modal('show');
+        }
+
+        function checkPixStatus(reference) {
+            $.ajax({
+                url: 'check_pix_status.php',
+                type: 'POST',
+                dataType: 'json',
+                data: { reference: reference },
+                success: function (response) {
+                    console.log(response);
+
+                    if (response.status === 'APROVADO') {
+                        $('#qrCodeImage').attr('src', 'aprovado.png');
+                        clearInterval(pixCheckInterval);
+                    }
+
+                    if (response.status === 'EXPIRADO') {
+                        $('#qrCodeImage').attr('src', 'expirado.png');
+                        clearInterval(pixCheckInterval);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Erro ao verificar o status do PIX.");
+                }
+            });
+        }
+
+
+        $('#pixForm').on('submit', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: 'polopag_generate_pix.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    showPixModal(response.reference, parseFloat(response.price), response.points, response.base64);
+                    pixCheckInterval = setInterval(function () {
+                        checkPixStatus(response.reference);
+                    }, 3000);
+                },
+                error: function (xhr, status, error) {
+                    alert("Erro ao gerar o PIX. Por favor, tente novamente.");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
