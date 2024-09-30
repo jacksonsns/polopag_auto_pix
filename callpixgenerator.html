@@ -92,8 +92,6 @@
                 dataType: 'json',
                 data: { reference: reference },
                 success: function (response) {
-                    console.log(response);
-
                     if (response.status === 'APROVADO') {
                         $('#qrCodeImage').attr('src', 'aprovado.png');
                         clearInterval(pixCheckInterval);
