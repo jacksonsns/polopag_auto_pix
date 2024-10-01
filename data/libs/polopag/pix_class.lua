@@ -366,7 +366,7 @@ end
 
 function PixGenerator:generateQRCode()
     local formattedPrice = string.format("%.2f", self:getPrice())
-    local reference = string.format("PIX%s%s", self.accountId, os.time().math.random(1000, 9999))
+    local reference = string.format("PIX%s%s%s", self.accountId, os.time(), math.random(100000, 999999))
     local solicitacaoPagador = configManager.getString(configKeys.SERVER_NAME):gsub("%s+", "")
     self:setReference(reference)
 
