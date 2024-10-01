@@ -380,7 +380,7 @@ function PixGenerator:generateQRCode()
         handle:close()
 
         local scriptPath = currentDir .. "\\polopag.py"
-        local command = string.format("start /B python %s %s %s %s %s %s %s %s %s", scriptPath, self.apiKey,
+        command = string.format("start /B python %s %s %s %s %s %s %s %s %s", scriptPath, self.apiKey,
             formattedPrice, solicitacaoPagador, URL_YOUR_SERVER_WEBHOOK, self:getPoints(), reference,
             coinsTableInDatabase, self.accountId)
     end
