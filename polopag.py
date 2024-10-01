@@ -88,7 +88,7 @@ def save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_
         cursor = connection.cursor()
         try:
             query = """INSERT INTO polopag_transacoes (account_id, txid, base64, copia_e_cola, price, points, coins_table, expires_at, status, reference, type, internalId, origin) 
-            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, 'PIX', %s, 'game')"""
+            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW() + 3600, %s, %s, 'PIX', %s, 'game')"""
             cursor.execute(query, (account_id, txid, base64_qrcode, copia_e_cola, valor, points, coins_table, status, reference, internal_id))
             connection.commit()
             print("QRCode PIX e internalId salvo com sucesso.")
