@@ -86,7 +86,7 @@ CREATE TABLE `polopag_transacoes` (
    - Example settings include API credentials, PIX URLs, and database credentials.
 
 6. **Integration Steps:**
-   - `callpixgenerator.html`: This file is used to trigger the PIX generation process from the web interface.
+   - `callpixgenerator.html`: This file is used to trigger the PIX generation process from the web interface. You can integrate on you site and need to edit the account_name value.
    - `polopag_generate_pix.php`: Handles the backend logic for generating PIX payment requests.
    - `check_pix_status.php`: This script is responsible for verifying the status of PIX transactions and ensuring successful processing.
 
