@@ -47,7 +47,7 @@ function generate_pix_from_polopag($reference, $price, $config)
         $response_data = json_decode($response, true);
         return $response_data;
     } else {
-        die("Erro ao gerar o PIX: $response");
+        die("Erro ao gerar o PIX. Por favor, tente novamente mais tarde.");
     }
 }
 
