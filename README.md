@@ -1,6 +1,7 @@
 # canary_auto_pix
 ```markdown
-# Works with PIX from: https://polopag.com
+# Works with PIX from: https://polopag.com -> DISCORD: marcinho1994#8446
+# First PIX Project to work! Need help installing? -> DISCORD: marcinho1994#8446
 
 ## Instructions for Linux Machines
 ```
