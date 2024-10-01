@@ -24,7 +24,8 @@ function generate_pix_from_polopag($reference, $price, $config)
         "calendario" => ["expiracao" => 3600],
         "referencia" => $reference,
         "solicitacaoPagador" => "Pagamento via PIX",
-        "infoAdicionais" => []
+        "infoAdicionais" => [],
+        "webhookUrl" => $config['webhook_url']
     ];
 
     $headers = [
