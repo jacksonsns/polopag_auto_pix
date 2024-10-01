@@ -54,7 +54,12 @@ function generate_pix_from_polopag($reference, $price, $config)
 
 function check_existing_pix($account_id, $price, $pdo)
 {
-    $query_check = "SELECT * FROM polopag_transacoes WHERE account_id = :account_id AND price = :price AND status = 'ATIVA' LIMIT 1";
+    $query_check = "SELECT * FROM polopag_transacoes 
+                    WHERE account_id = :account_id 
+                    AND price = :price 
+                    AND status = 'ATIVA' 
+                    AND expires_at > NOW() 
+                    LIMIT 1";
     $stmt_check = $pdo->prepare($query_check);
     $stmt_check->execute([
         ':account_id' => $account_id,
@@ -72,12 +77,13 @@ function check_existing_pix($account_id, $price, $pdo)
             'copia_e_cola' => $existing_pix['copia_e_cola'],
             'price' => $existing_pix['price'],
             'points' => $existing_pix['points'],
-            'status' => $existing_pix['status'],
-            'expires_at' => $existing_pix['expires_at']
+            'status' => $existing_pix['status']
         ];
     }
+
     return false;
 }
+
 function get_account_id($account_name, $pdo)
 {
     try {
@@ -106,10 +112,8 @@ function store_pix_data($reference, $txid, $internalId, $base64, $copia_e_cola, 
     $_SESSION['last_pix_generated_time'] = $current_time;
 
     try {
-        $expires_at = date('Y-m-d H:i:s', strtotime('+3600 seconds'));
-
         $query = "INSERT INTO polopag_transacoes (account_id, reference, txid, internalId, base64, copia_e_cola, price, points, status, type, origin, created_at, expires_at)
-                  VALUES (:account_id, :reference, :txid, :internalId, :base64, :copia_e_cola, :price, :points, :status, :type, 'site', NOW(), :expires_at)";
+                  VALUES (:account_id, :reference, :txid, :internalId, :base64, :copia_e_cola, :price, :points, :status, :type, 'site', NOW(), NOW() + INTERVAL 1 HOUR)";
         $stmt = $pdo->prepare($query);
 
         $stmt->execute([
@@ -122,8 +126,7 @@ function store_pix_data($reference, $txid, $internalId, $base64, $copia_e_cola, 
             ':price' => $price,
             ':points' => $points,
             ':status' => $status,
-            ':type' => $type,
-            ':expires_at' => $expires_at
+            ':type' => $type
         ]);
 
         return [
@@ -134,8 +137,7 @@ function store_pix_data($reference, $txid, $internalId, $base64, $copia_e_cola, 
             'copia_e_cola' => $copia_e_cola,
             'price' => $price,
             'points' => $points,
-            'status' => $status,
-            'expires_at' => $expires_at
+            'status' => $status
         ];
 
     } catch (PDOException $e) {
