@@ -69,6 +69,7 @@ CREATE TABLE `polopag_transacoes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
+
 ## File Configuration
 
 1. **Edit `pix_class.lua`:** Customize the file with your preferences and `api_key`.
@@ -77,4 +78,17 @@ CREATE TABLE `polopag_transacoes` (
 
 3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`.
 
-4. **Configure `polopag_webhook.php`:** Open the file and set the path to `config.lua`.
+4. **Place `callpixgenerator.html`, `polopag_generate_pix.php`, `polopag_config.php`, and `check_pix_status.php` in the root folder of your website.**
+   - These files are essential for generating PIX transactions and checking their status.
+
+5. **Edit `polopag_config.php`:**
+   - This file contains important configuration settings for your PIX integration. Ensure that you configure the file correctly by adding your API keys, database connection details, and any other necessary parameters.
+   - Example settings include API credentials, PIX URLs, and database credentials.
+
+6. **Integration Steps:**
+   - `callpixgenerator.html`: This file is used to trigger the PIX generation process from the web interface.
+   - `polopag_generate_pix.php`: Handles the backend logic for generating PIX payment requests.
+   - `check_pix_status.php`: This script is responsible for verifying the status of PIX transactions and ensuring successful processing.
+
+7. **Final Notes:**
+   - Ensure that all files are properly configured with your specific server settings and that the appropriate permissions are granted for PHP and Python scripts to execute.
