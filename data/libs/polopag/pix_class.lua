@@ -68,7 +68,8 @@ local MODAL_COPIA_COLA_BUTTON_NUMBER = 0
 
 local PIX_GENERATED_MODAL_TITLE = "Pix Gerado: "
 local PIX_GENERATED_MODAL_MESSAGE_TUTORIAL = "Escaneie o QRCode e efetue o pagamento."
-local PIX_GENERATED_MODAL_MESSAGE_WARNING = "Os seus pontos vao ser creditados automaticamente ao finalizar o pagamento."
+local PIX_GENERATED_MODAL_MESSAGE_WARNING =
+    "Os seus pontos vao ser creditados automaticamente ao finalizar o pagamento."
 local PIX_GENERATED_MODAL_BUTTON_COPIA_COLA_ = "Copia e Cola"
 local PIX_GENERATED_MODAL_BUTTON_VERIFY_PIX = "Verificar"
 
@@ -129,6 +130,7 @@ local function findPixByReferenceAndShowWindow(pid, accountId)
             local query = string.format([[
         SELECT * FROM `polopag_transacoes`
         WHERE reference = %s
+        AND expires_at > NOW()
         LIMIT 1]], db.escapeString(pixInstance:getReference()))
 
             local resultId = db.storeQuery(query)
@@ -141,8 +143,7 @@ local function findPixByReferenceAndShowWindow(pid, accountId)
                 local expires_at = result.getString(resultId, "expires_at")
                 result.free(resultId)
 
-                if ((status and status == "ATIVA") and
-                    (expires_at and expires_at > os.date('%Y-%m-%d %H:%M:%S', os.time()))) then
+                if (status and status == "ATIVA") then
                     if base64 and copia_e_cola and coins_table and txid then
                         pixInstance:setStatus(status)
                         pixInstance:setBase64(base64)
@@ -318,6 +319,7 @@ function PixGenerator:findActiveNonExpiredPix(accountId, price, points)
         WHERE account_id = %d AND status = 'ATIVA'
         AND price = %.2f
         AND points = %d
+        AND expires_at > NOW()
         LIMIT 1]], accountId, string.format("%.2f", price), points)
 
     local resultId = db.storeQuery(query)
@@ -330,7 +332,7 @@ function PixGenerator:findActiveNonExpiredPix(accountId, price, points)
         local status = result.getString(resultId, "status")
         local expires_at = result.getString(resultId, "expires_at")
         result.free(resultId)
-        if ((status and status == "ATIVA") and (expires_at and expires_at > os.date('%Y-%m-%d %H:%M:%S', os.time()))) then
+        if (status and status == "ATIVA") then
             if base64 and copia_e_cola and reference and coins_table and txid then
                 self:setStatus(status)
                 self:setBase64(base64)
@@ -364,7 +366,7 @@ end
 
 function PixGenerator:generateQRCode()
     local formattedPrice = string.format("%.2f", self:getPrice())
-    local reference = string.format("PIX%s%s", self.accountId, os.time())
+    local reference = string.format("PIX%s%s", self.accountId, os.time().math.random(1000, 9999))
     local solicitacaoPagador = configManager.getString(configKeys.SERVER_NAME):gsub("%s+", "")
     self:setReference(reference)
 

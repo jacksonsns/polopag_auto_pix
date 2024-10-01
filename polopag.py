@@ -82,14 +82,14 @@ def generate_pix(valor, api_key, reference, solicitacao_pagador, webhook_url):
         print(f"Erro de requisicao: {e}")
         return None
 
-def save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_table, expires_at, status, reference, account_id, internal_id):
+def save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_table, status, reference, account_id, internal_id):
     connection = connect_to_database()
     if connection:
         cursor = connection.cursor()
         try:
-            query = """INSERT INTO polopag_transacoes (account_id, txid, base64, copia_e_cola, price, points, coins_table, expires_at, status, reference, type, internalId) 
-                       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "PIX", %s, "game")"""
-            cursor.execute(query, (account_id, txid, base64_qrcode, copia_e_cola, valor, points, coins_table, expires_at, status, reference, internal_id))
+            query = """INSERT INTO polopag_transacoes (account_id, txid, base64, copia_e_cola, price, points, coins_table, expires_at, status, reference, type, internalId, origin) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, 'PIX', %s, 'game')"""
+            cursor.execute(query, (account_id, txid, base64_qrcode, copia_e_cola, valor, points, coins_table, status, reference, internal_id))
             connection.commit()
             print("QRCode PIX e internalId salvo com sucesso.")
         except Error as e:
@@ -107,9 +107,7 @@ def process_pix(api_key, valor, solicitacao_pagador, webhook_url, points, refere
         internal_id = pix_data.get("internalId")
         status = "ATIVA"
 
-        expires_at = (datetime.now() + timedelta(seconds=3600)).strftime('%Y-%m-%d %H:%M:%S') #1 hora
-
-        save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_table, expires_at, status, reference, account_id, internal_id)
+        save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_table, status, reference, account_id, internal_id)
 
 if __name__ == "__main__":
     api_key = sys.argv[1]
