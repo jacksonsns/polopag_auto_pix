@@ -8,7 +8,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 
 // Path para o config.lua
-$config_path = 'config.lua';
+$config_path = '/home/otserv/config.lua';
 function read_config($config_path)
 {
     $config = [];
@@ -30,7 +30,7 @@ function read_config($config_path)
     $config['database'] = $database_match[1];
     $config['port'] = $port_match[1];
     $config['api_url'] = "https://api.polopag.com/v1/cobpix";
-    $config['api_key'] = "04c15c6cab0a3140c40ccc746cf93598e1d4ae598c08b32f9010cf037c520b2f";
+    $config['api_key'] = ""; // Your Api Key
     $config['coins_column'] = "coins_transferable";
 
     return $config;
