@@ -35,10 +35,10 @@
     <div class="container text-center">
         <h1>Gerar PIX</h1>
         <form id="pixForm" class="d-flex flex-column align-items-center">
-            <label>Aqui você tem um input do tipo "hidden", chamado account_name. Quando você colocar esse HTML na página de pontos do seu site, você deve preencher este input com algo do tipo "$account_logged()->getAccountName" ou equivalente no seu site.</label>
+            <label>Aqui você tem um input do tipo "hidden", chamado account_name. Quando você colocar esse HTML na página de pontos do seu site, você deve preencher este input com algo do tipo "$account_logged()->getAccountName()" ou "$account_logged()->getName()" ou equivalente no seu site.</label>
             <label>Caso, você não o saiba fazer, basta mudar o campo de hidden para "text" e o player irá preenche-lo manualmente sempre.</label>
             <div class="form-group">
-                <input type="hidden" class="form-control" id="account_name" name="account_name" value=""> <!-- Aqui você edita para o método do seu site (gesior seria $account_logged->getAccountName()) ou algo parecido -->
+                <input type="hidden" class="form-control" id="account_name" name="account_name" value=""> <!-- Aqui você edita para o método do seu site (gesior seria $account_logged->getAccountName(), myacc seria $account_logged->getName()) ou algo parecido -->
             </div>
             <div class="form-group d-flex align-items-center">
                 <span>R$</span>
