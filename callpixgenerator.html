@@ -80,27 +80,27 @@
 
     <script>
         function showPixModal(reference, price, points, qrCodeBase64) {
-            $('#reference').text(reference);
-            $('#pixValue').text(price.toFixed(2).replace('.', ','));
-            $('#points').text(points);
-            $('#qrCodeImage').attr('src', 'data:image/png;base64,' + qrCodeBase64);
-            $('#pixModal').modal('show');
+            $("#reference").text(reference);
+            $("#pixValue").text(price.toFixed(2).replace(".", ","));
+            $("#points").text(points);
+            $("#qrCodeImage").attr("src", "data:image/png;base64," + qrCodeBase64);
+            $("#pixModal").modal("show");
         }
 
         function checkPixStatus(reference) {
             $.ajax({
-                url: '/check_pix_status.php',
-                type: 'POST',
-                dataType: 'json',
+                url: "/check_pix_status.php",
+                type: "POST",
+                dataType: "json",
                 data: { reference: reference },
                 success: function (response) {
-                    if (response.status === 'APROVADO') {
-                        $('#qrCodeImage').attr('src', 'aprovado.png');
+                    if (response.status === "APROVADO") {
+                        $("#qrCodeImage").attr("src", "aprovado.png");
                         clearInterval(pixCheckInterval);
                     }
 
-                    if (response.status === 'EXPIRADO') {
-                        $('#qrCodeImage').attr('src', 'expirado.png');
+                    if (response.status === "EXPIRADO") {
+                        $("#qrCodeImage").attr("src", "expirado.png");
                         clearInterval(pixCheckInterval);
                     }
                 },
@@ -111,12 +111,12 @@
         }
 
 
-        $('#pixForm').on('submit', function (event) {
+        $("#pixForm").on("submit", function (event) {
             event.preventDefault();
 
             $.ajax({
-                url: '/polopag_generate_pix.php',
-                type: 'POST',
+                url: "/polopag_generate_pix.php",
+                type: "POST",
                 data: $(this).serialize(),
                 success: function (response) {
                     showPixModal(response.reference, parseFloat(response.price), response.points, response.base64);
