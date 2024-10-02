@@ -89,7 +89,7 @@
 
         function checkPixStatus(reference) {
             $.ajax({
-                url: 'check_pix_status.php',
+                url: '/check_pix_status.php',
                 type: 'POST',
                 dataType: 'json',
                 data: { reference: reference },
@@ -115,7 +115,7 @@
             event.preventDefault();
 
             $.ajax({
-                url: 'polopag_generate_pix.php',
+                url: '/polopag_generate_pix.php',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {
