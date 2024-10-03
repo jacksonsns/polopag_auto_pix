@@ -4,7 +4,7 @@ import mysql.connector
 import re
 import os
 from mysql.connector import Error
-from datetime import datetime, timedelta
+import time
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 lua_config_path = os.path.join(script_dir, 'config.lua')
@@ -61,7 +61,7 @@ def generate_pix(valor, api_key, reference, solicitacao_pagador, webhook_url):
     data = {
         "valor": valor,
         "calendario": {
-            "expiracao": 3600  #1 hora
+            "expiracao": 3600
         },
         "isDeposit": False,
         "referencia": reference,
@@ -71,13 +71,42 @@ def generate_pix(valor, api_key, reference, solicitacao_pagador, webhook_url):
     }
 
     try:
-        response = requests.post(url, headers=headers, json=data)
+        headers['Accept-Encoding'] = 'gzip, deflate'
+        headers['Connection'] = 'keep-alive'
+        
+        start_time = time.time()
+        response = requests.post(
+            url, 
+            headers=headers, 
+            json=data, 
+            timeout=3,
+            verify=True,
+            allow_redirects=False
+        )
+
+        elapsed_time = time.time() - start_time
+
         if response.status_code == 200:
+            print(f"Tempo decorrido: {elapsed_time:.2f} segundos")
             return response.json()
         else:
             print(f"Erro na API: {response.status_code}")
             print(f"Resposta completa da API: {response.text}")
+            print(f"Tempo decorrido: {elapsed_time:.2f} segundos")
             return None
+
+    except requests.exceptions.Timeout:
+        print("Timeout ao tentar conectar à API.")
+        return None
+
+    except requests.exceptions.ConnectionError:
+        print("Erro de conexão. Verifique sua rede ou a URL da API.")
+        return None
+
+    except requests.exceptions.HTTPError as errh:
+        print(f"Erro HTTP: {errh}")
+        return None
+
     except requests.exceptions.RequestException as e:
         print(f"Erro de requisicao: {e}")
         return None
@@ -88,7 +117,7 @@ def save_pix_data_to_db(txid, base64_qrcode, copia_e_cola, valor, points, coins_
         cursor = connection.cursor()
         try:
             query = """INSERT INTO polopag_transacoes (account_id, txid, base64, copia_e_cola, price, points, coins_table, expires_at, status, reference, type, internalId, origin) 
-            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW() + 3600, %s, %s, 'PIX', %s, 'game')"""
+            VALUES (%s, %s, %s, %s, %s, %s, %s, NOW() + INTERVAL 1 HOUR, %s, %s, 'PIX', %s, 'game')"""
             cursor.execute(query, (account_id, txid, base64_qrcode, copia_e_cola, valor, points, coins_table, status, reference, internal_id))
             connection.commit()
             print("QRCode PIX e internalId salvo com sucesso.")
