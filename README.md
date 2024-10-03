@@ -77,9 +77,9 @@ CREATE TABLE `polopag_transacoes` (
 
 2. **Place `polopag.py`:** Ensure `polopag.py` is in the main directory alongside `config.lua`.
 
-3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`.
+3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`. This file is necessary to both PIX works (game and site).
 
-4. **Place `callpixgenerator.html`, `polopag_generate_pix.php`, `polopag_config.php`, and `check_pix_status.php` in the root folder of your website.**
+4. **Place ALL SITE FITES in the root folder of your website.**
    - These files are essential for generating PIX transactions and checking their status.
 
 5. **Edit `polopag_config.php`:**
@@ -87,9 +87,7 @@ CREATE TABLE `polopag_transacoes` (
    - Example settings include API credentials, PIX URLs, and database credentials.
 
 6. **Integration Steps:**
-   - `callpixgenerator.html`: This file is used to trigger the PIX generation process from the web interface. You can integrate on you site and need to edit the account_name value.
-   - `polopag_generate_pix.php`: Handles the backend logic for generating PIX payment requests.
-   - `check_pix_status.php`: This script is responsible for verifying the status of PIX transactions and ensuring successful processing.
+*   - `callpixgenerator.html`: This file is an example to be used to trigger the PIX generation process from the web interface. You can integrate on you site and need to edit the account_name value.*
 
-7. **Final Notes:**
+1. **Final Notes:**
    - Ensure that all files are properly configured with your specific server settings and that the appropriate permissions are granted for PHP and Python scripts to execute.
