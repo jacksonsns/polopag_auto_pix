@@ -477,7 +477,7 @@ function PixGenerator:generateWindow(player, lastWindowId, buttonId, choice)
         end
 
         if self:initiatePix(choice) then
-            addEvent(findPixByReferenceAndShowWindow, 5000, player:getId(), player:getAccountId())
+            addEvent(findPixByReferenceAndShowWindow, 3000, player:getId(), player:getAccountId())
         else
             sendErrorGeneratingPix(player)
         end
