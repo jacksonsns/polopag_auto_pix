@@ -5,6 +5,11 @@
 
 ## Instructions for Linux Machines
 ```
+0. **Verify if pip is installed**
+  ```sh
+sudo apt install python3-pip
+  ```
+
 ### For Newer Linux Machines
 
 1. **Update package lists for upgrades and new package installations:**
