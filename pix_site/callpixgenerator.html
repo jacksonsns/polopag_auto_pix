@@ -35,10 +35,15 @@
     <div class="container text-center">
         <h1>Gerar PIX</h1>
         <form id="pixForm" class="d-flex flex-column align-items-center">
-            <label>Aqui você tem um input do tipo "hidden", chamado account_name. Quando você colocar esse HTML na página de pontos do seu site, você deve preencher este input com algo do tipo "$account_logged()->getAccountName()" ou "$account_logged()->getName()" ou equivalente no seu site.</label>
-            <label>Caso, você não o saiba fazer, basta mudar o campo de hidden para "text" e o player irá preenche-lo manualmente sempre.</label>
+            <label>Aqui você tem um input do tipo "hidden", chamado account_name. Quando você colocar esse HTML na
+                página de pontos do seu site, você deve preencher este input com algo do tipo
+                "$account_logged()->getAccountName()" ou "$account_logged()->getName()" ou equivalente no seu
+                site.</label>
+            <label>Caso, você não o saiba fazer, basta mudar o campo de hidden para "text" e o player irá preenche-lo
+                manualmente sempre.</label>
             <div class="form-group">
-                <input type="hidden" class="form-control" id="account_name" name="account_name" value=""> <!-- Aqui você edita para o método do seu site gesior seria $account_logged->getAccountName(), myacc seria $account_logged->getName() ou algo parecido -->
+                <input type="hidden" class="form-control" id="account_name" name="account_name" value="">
+                <!-- Aqui você edita para o método do seu site gesior seria $account_logged->getAccountName(), myacc seria $account_logged->getName() ou algo parecido -->
             </div>
             <div class="form-group d-flex align-items-center">
                 <span>R$</span>
@@ -46,6 +51,52 @@
                     style="max-width: 90px;" min="0" step="1">
                 <span>.00</span>
             </div>
+            <!-- Descomente este bloco para adicionar valores pré-definidos -->
+            <!-- <div class="form-group">
+                <label>Escolha o valor:</label>
+                <div class="d-flex flex-wrap">
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price50" value="50" required>
+                        <label class="form-check-label" for="price50">R$50,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price100" value="100" required>
+                        <label class="form-check-label" for="price100">R$100,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price200" value="200" required>
+                        <label class="form-check-label" for="price200">R$200,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price300" value="300" required>
+                        <label class="form-check-label" for="price300">R$300,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price400" value="400" required>
+                        <label class="form-check-label" for="price400">R$400,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price500" value="500" required>
+                        <label class="form-check-label" for="price500">R$500,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price600" value="600" required>
+                        <label class="form-check-label" for="price600">R$600,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price1000" value="1000" required>
+                        <label class="form-check-label" for="price1000">R$1000,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price1500" value="1500" required>
+                        <label class="form-check-label" for="price1500">R$1500,00</label>
+                    </div>
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="radio" name="price" id="price2000" value="2000" required>
+                        <label class="form-check-label" for="price2000">R$2000,00</label>
+                    </div>
+                </div>
+            </div> -->
             <button type="submit" class="btn btn-success">Gerar PIX</button>
         </form>
     </div>

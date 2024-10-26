@@ -48,3 +48,27 @@ function calculatePromotionPoints($price) { // Implemente ou modifique sua próp
         return 0;
     }
 }
+
+// $points_table = [ // Descomente esse array e função e comente a de cima caso queira usar tabela fixa.
+//     50 => 2400,
+//     100 => 5200,
+//     200 => 12000,
+//     300 => 18600,
+//     400 => 25600,
+//     500 => 32500,
+//     600 => 40000,
+//     1000 => 70000,
+//     1500 => 115000,
+//     2000 => 155000
+// ];
+
+// function calculatePromotionPoints($price) {
+
+//     foreach ($points_table as $threshold => $points) {
+//         if ($price <= $threshold) {
+//             return $points;
+//         }
+//     }
+
+//     return end($points_table); // Return the highest points if price exceeds all thresholds
+// }

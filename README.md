@@ -79,7 +79,7 @@ CREATE TABLE `polopag_transacoes` (
 
 3. **Place `polopag_webhook.php`:** Ensure `polopag_webhook.php` is in the main directory of your site alongside `index.php`. This file is necessary to both PIX works (game and site).
 
-4. **Place ALL SITE FITES in the root folder of your website.**
+4. **Place ALL SITE FILES in the root folder of your website.**
    - These files are essential for generating PIX transactions and checking their status.
 
 5. **Edit `polopag_config.php`:**
