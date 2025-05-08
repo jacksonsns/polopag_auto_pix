@@ -19,7 +19,10 @@ sudo apt install python3-pip
 
 2. **Install MySQL connector for Python:**
   ```sh
-  python3 -m pip install mysql-connector-python
+  # Try Install with pip
+  python3 -m pip install mysql-connector-python || \
+  # If it fails (e.g., due to a managed environment error), use APT instead.
+  sudo apt install python3-mysql.connector
   ```
   
 ### For Older Linux Machines
